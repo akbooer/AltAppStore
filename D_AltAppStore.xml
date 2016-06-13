@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <device>
+    <deviceType>urn:schemas-upnp-org:device:AltAppStore:1</deviceType>
+    <friendlyName>Alternate App Store</friendlyName>
+    <manufacturer></manufacturer>
+    <manufacturerURL></manufacturerURL>
+    <modelDescription>AltUI App Store</modelDescription>
+    <modelName>1</modelName>
+    <modelNumber>1</modelNumber>
+    <handleChildren>1</handleChildren>
+    <Category_Num>1</Category_Num>
+    <UDN></UDN>
+    <serviceList>
+      <service>
+        <serviceType>urn:schemas-upnp-org:service:AltAppStore:1</serviceType>
+        <serviceId>urn:schemas-upnp-org:serviceId:AltAppStore1</serviceId>
+        <SCPDURL>S_AltAppStore.xml</SCPDURL>
+      </service>
+    </serviceList>
+		<staticJson>D_AltAppStore.json</staticJson>
+    <implementationList>
+      <implementationFile>I_AltAppStore.xml</implementationFile>
+    </implementationList>
+  </device>
+</root>
