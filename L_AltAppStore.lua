@@ -1,6 +1,14 @@
+-- // This program is free software: you can redistribute it and/or modify
+-- // it under the condition that it is for private or home useage and 
+-- // this whole comment is reproduced in the source code file.
+-- // Commercial utilisation is not authorized without the appropriate written agreement.
+-- // This program is distributed in the hope that it will be useful,
+-- // but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE . 
+
 local ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.06.12",
+  VERSION       = "2016.06.14",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
   COPYRIGHT     = "(c) 2013-2016",
@@ -39,7 +47,7 @@ local icon_directories = {
 }
 
 local ludl_directories = {
-  [true] = "./",                -- openLuup (since default dir may not be named so)
+  [true] = "./",                -- openLuup (since default dir may not be /etc/cmh-ludl/)
   [5] = "/etc/cmh-ludl/",       -- UI5 
   [7] = "/etc/cmh-ludl/",       -- UI7
 }
@@ -323,8 +331,52 @@ local IPhone =
   --        "subdir1",
   --        "subdir2",
   --      },
-  --      pattern = "[DILS]_%w+%.%w+"     -- Lua pattern string to describe wanted files
+  --      pattern = "[DIJLS]_%w+%.%w+"     -- Lua pattern string to describe wanted files
         pattern   = "IPhone",                   -- pattern match string for required files
+      },
+  -- other stuff can go here
+    }
+  }
+
+
+-------------------------------------------------------
+--
+-- AltAppStore's own credentials
+--
+
+local AltAppStore =  
+  {
+    AllowMultiple   = "0",
+    Title           = "AltAppStore",
+    Icon            = "https://raw.githubusercontent.com/akbooer/AltAppStore/master/AltAppStore.png", 
+    Instructions    = "https://github.com/akbooer/AltAppStore",  --TODO: change to better documentation
+    AutoUpdate      = "0",
+    VersionMajor    = "not",
+    VersionMinor    = "installed",
+    id              = "AltAppStore",    -- TODO: replace with real id once in MiOS App Store?
+--    timestamp       = os.time(),
+    Files           = {},
+    Devices         = {
+      {
+        DeviceFileName  = "D_AltAppStore.xml",
+        DeviceType      = "urn:schemas-upnp-org:device:AltAppStore:1",
+        ImplFile        = "I_AltAppStore.xml",
+        Invisible       =  "0",
+--        CategoryNum = "1",
+--        StateVariables = "..." -- see luup.create_device documentation
+      },
+    },
+    Repository      = {
+      {
+        type      = "GitHub",
+        source    = "akbooer/AltAppStore",
+        default   = "master",                   -- "development" or "master" or any tagged release
+  --      folders = {                     -- these are the bits we need
+  --        "subdir1",
+  --        "subdir2",
+  --      },
+  --      pattern = "[DIJLS]_%w+%.%w+"     -- Lua pattern string to describe wanted files
+        pattern   = "AltAppStore",                   -- pattern match string for required files
       },
   -- other stuff can go here
     }
@@ -341,6 +393,7 @@ local IPhone =
 local ipl         -- the plugin metadata
 local next_file   -- download iterator
 local target      -- location for downloads
+local total       -- total file transfer size
 
 function update_plugin_run(p)
   _log "starting <run> phase..."
@@ -352,7 +405,10 @@ function update_plugin_run(p)
     return false                            -- failure
   end
   
-  local r = (ipl.Repository or {}) [1]
+  local r
+  for _, repos in ipairs (ipl.Repository or {}) do
+    if repos and (repos.type == "GitHub") then r = repos break end  
+  end
   if not (r and r.source) then 
     _log "invalid repository metadata"
     return false
@@ -369,6 +425,7 @@ function update_plugin_run(p)
   next_file = updater.get_release_by_file (rev, folders, r.pattern) 
   
   display ("Downloading...", ipl.Title or '?')
+  total = 0
   _log "starting <job> phase..."
   return true                               -- continue with <job>
 end
@@ -385,8 +442,6 @@ local jobstate =  {
     Requeue=6,
     InProgressPendingData=7,
  }
-
-local total = 0     -- total file transfer size
 
 function update_plugin_job()
   
