@@ -218,6 +218,7 @@ local function GitHub (archive, target)
       local request = table.concat {Fcontents: format (archive),d , "?ref=", v}
       local resp, errmsg = git_request (request)
       if resp then
+  
         for _, x in ipairs (resp) do     -- x is a GitHub descriptor with name, path, etc...
           local wanted = (x.type == "file") and (x.name):match (pattern or '.') 
           if wanted then files[#files+1] = x end
@@ -344,7 +345,7 @@ local IPhone =
 -- AltAppStore's own credentials
 --
 
-local AltAppStore =  
+local _ =  
   {
     AllowMultiple   = "0",
     Title           = "AltAppStore",
@@ -465,8 +466,13 @@ function update_plugin_job()
     _log ("updating icons in ", icon_folder, "...")
     os.execute (table.concat {"mv ", target, "*.png ", icon_folder})
     _log ("updating device files in", ludl_folder, "...")
+    for file in lfs.dir (target) do
+      local compressed_file = table.concat {target, file, ".lzo"}
+      if (file: match ".+%..+") and lfs.attributes (compressed_file) then   -- ie. *.*
+        os.remove (compressed_file)    -- remove existing compressed file
+      end
+    end
     os.execute (table.concat {"mv ", target, "*.* ", ludl_folder})
-    --TODO: possible pluto-lzo?
    
     _log "update completed"
     

@@ -54,6 +54,22 @@
 						"Width": 75,
 						"Height": 20
 					}
+				},
+				{
+					"ControlGroup":"2",
+					"ControlType": "label",
+					"top": "3",
+					"left": "0",
+					"Label": {
+						"lang_tag": "icons8",
+						"text": "<a href='https:\/\/icons8.com\/license\/' target='_blank'>icon by icons8</a>"
+					},
+					"Display": {
+						"Top": 110,
+						"Left": 50,
+						"Width": 75,
+						"Height": 20
+					}
 				}
 			]
 		},
