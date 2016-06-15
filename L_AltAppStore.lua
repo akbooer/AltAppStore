@@ -8,7 +8,7 @@
 
 local ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.06.14",
+  VERSION       = "2016.06.15a",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
   COPYRIGHT     = "(c) 2013-2016",
@@ -35,7 +35,7 @@ local devNo     -- our own device number
 
 local SID = {
   altui = "urn:upnp-org:serviceId:altui1",                -- Variables = 'DisplayLine1' and 'DisplayLine2'
-  apps  = "urn:schemas-upnp-org:serviceId:AltAppStore1",
+  apps  = "urn:upnp-org:serviceId:AltAppStore1",
   hag   = "urn:micasaverde-com:serviceId:HomeAutomationGateway1",
 }
 
@@ -60,6 +60,15 @@ local _log = function (...) luup.log (table.concat ({ABOUT.NAME, ':', ...}, ' ')
 local pathSeparator = '/'
 
 -- utilities
+
+local function setVar (name, value, service, device)
+  service = service or SID.apps
+  device = device or devNo
+  local old = luup.variable_get (service, name, device)
+  if tostring(value) ~= old then 
+   luup.variable_set (service, name, value, device)
+  end
+end
 
 local function display (line1, line2)
   if line1 then luup.variable_set (SID.altui, "DisplayLine1",  line1 or '', devNo) end
@@ -228,6 +237,7 @@ local function GitHub (archive, target)
         _log (errmsg)
       end
     end
+    _log ("Number of files to download: " .. N)
     
     return function () N = N+1; return get_file (files[N]) end    -- iterator for each file we want
   end
@@ -295,6 +305,20 @@ local function install_if_missing (plugin)
   return devNo
 end
 
+local function file_copy (source, destination)
+  local f = io.open (source, "rb")
+  if f then
+    local content = f: read "*a"
+    f: close ()
+    local g = io.open (destination, "wb")
+    if g then
+      g: write (content)
+      g: close ()
+    else
+      _log ("error writing", destination)
+    end
+  end
+end
 
 -------------------------------------------------------
 --
@@ -391,6 +415,7 @@ local _ =
 -- <job>  phased download, with control returned to scheduler between individual files
 --
 
+-- these variables are shared between the two phases...
 local ipl         -- the plugin metadata
 local next_file   -- download iterator
 local target      -- location for downloads
@@ -461,23 +486,32 @@ function update_plugin_job()
     -- finish up
     _log ("Total size", total)
  
-    -- I generally deplore the use of os.execute (won't work on every platform?), 
-    -- but in this case it is much kinder on the file system to move, rather than copy/delete. 
+    -- copy files to final destination... 
     _log ("updating icons in ", icon_folder, "...")
-    os.execute (table.concat {"mv ", target, "*.png ", icon_folder})
     _log ("updating device files in", ludl_folder, "...")
     for file in lfs.dir (target) do
-      local compressed_file = table.concat {target, file, ".lzo"}
-      if (file: match ".+%..+") and lfs.attributes (compressed_file) then   -- ie. *.*
-        os.remove (compressed_file)    -- remove existing compressed file
+      local source = target .. file
+      local attributes = lfs.attributes (source)
+      if file: match "^[^%.]" and attributes.mode == "file" then
+        local destination
+        if file:match ".+%.png$" then    -- ie. *.png
+          destination = icon_folder .. file
+        else
+          destination = ludl_folder .. file
+          local compressed_file = destination .. ".lzo"
+          if lfs.attributes (compressed_file) then   
+            os.remove (compressed_file)    -- remove existing compressed file
+          end
+        end
+        file_copy (source, destination)
+        os.remove (source)
       end
     end
-    os.execute (table.concat {"mv ", target, "*.* ", ludl_folder})
-   
+       
     _log "update completed"
     
     install_if_missing (ipl)
-    display ('','')
+    display ('Reload','required')
     return jobstate.Done,0        -- finished job
   end
 end
@@ -507,6 +541,7 @@ function init (d)
   luup.register_handler ("HTTP_AltAppStore", "update_plugin")
   display (ABOUT.NAME,'')
   
+  setVar ("Version", ABOUT.VERSION)
   set_failure (0)
   return true, "OK", ABOUT.NAME
 end

@@ -35,7 +35,7 @@
 					"Display": {
 						"Service": "urn:upnp-org:serviceId:altui1",
 						"Variable": "DisplayLine1",
-						"Top": 60,
+						"Top": 40,
 						"Left": 50,
 						"Width": 75,
 						"Height": 20
@@ -49,7 +49,21 @@
 					"Display": {
 						"Service": "urn:upnp-org:serviceId:altui1",
 						"Variable": "DisplayLine2",
-						"Top": 80,
+						"Top": 60,
+						"Left": 50,
+						"Width": 75,
+						"Height": 20
+					}
+				},
+				{
+					"ControlGroup":"2",
+					"ControlType": "variable",
+					"top": "3",
+					"left": "0",
+					"Display": {
+						"Service": "urn:upnp-org:serviceId:AltAppStore1",
+						"Variable": "Version",
+						"Top": 100,
 						"Left": 50,
 						"Width": 75,
 						"Height": 20
@@ -58,14 +72,14 @@
 				{
 					"ControlGroup":"2",
 					"ControlType": "label",
-					"top": "3",
+					"top": "4",
 					"left": "0",
 					"Label": {
 						"lang_tag": "icons8",
 						"text": "<a href='https:\/\/icons8.com\/license\/' target='_blank'>icon by icons8</a>"
 					},
 					"Display": {
-						"Top": 110,
+						"Top": 120,
 						"Left": 50,
 						"Width": 75,
 						"Height": 20
