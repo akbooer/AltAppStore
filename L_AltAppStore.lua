@@ -1,3 +1,5 @@
+module ("L_AltAppStore", package.seeall)
+
 -- // This program is free software: you can redistribute it and/or modify
 -- // it under the condition that it is for private or home useage and 
 -- // this whole comment is reproduced in the source code file.
@@ -8,11 +10,11 @@
 
 local ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.06.15a",
+  VERSION       = "2016.06.16",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
   COPYRIGHT     = "(c) 2013-2016",
-  DOCUMENTATION = "???",
+  DOCUMENTATION = "https://github.com/akbooer/AltAppStore",
 }
 
 -- Plugin for Vera
@@ -24,7 +26,6 @@ local ABOUT = {
 --
 
 local https     = require "ssl.https"
-local ltn12     = require "ltn12"
 local lfs       = require "lfs"
 
 local json      = require "L_ALTUIjson"   -- we will always run with AltUI present
@@ -114,67 +115,42 @@ end
 
 local _ = {
   NAME          = "openLuup.github",
-  VERSION       = "2016.05.30",
-  DESCRIPTION   = "update plugins from GitHub repository",
+  VERSION       = "2016.06.16",
+  DESCRIPTION   = "download files from GitHub repository",
   AUTHOR        = "@akbooer",
   COPYRIGHT     = "(c) 2013-2016 AKBooer",
   DOCUMENTATION = "https://github.com/akbooer/openLuup/tree/master/Documentation",
 }
 
--- note that these routines only update the files in the plugins/downloads directory,
--- they don't copy them to the /etc/cmh-ludl/ directory.
-
 -- 2016.03.15  created
 -- 2016.04.25  make generic, for use with openLuup / AltUI / anything else
-
-
--- utilities
-
--- get and decode GitHub url
-local function git_request (request)
-  local decoded, errmsg
-  local response = https.request (request)
-  if response then 
-    decoded, errmsg = json.decode (response)
-  else
-    errmsg = response
-  end
-  return decoded, errmsg
-end
+-- 2016.06.16  just return file contents using iterator, don't actually write any files.
 
 -------------------------
 --
 --  GitHub() - factory function for individual plugin update from GitHub
 --
---  parameters:
+--  parameter:
 --    archive = "akbooer/openLuup",           -- GitHub repository
---    target  = "plugins/downloads/openLuup"  -- target directory for files and subdirectories
 --
 
-local function GitHub (archive, target) 
-  
-  -- ensure the download directories exist!
-  local function directory_check (subdirectories)
-    local function pathcheck (fullpath)
-      local _,msg = lfs.mkdir (fullpath)
-      _log (table.concat ({"checking directory", fullpath, ':', msg or "File created"}, ' '))
-    end
-    -- check or create path to the target root directory
-    local path = {}
-    for dir in target:gmatch "(%w+)" do
-      path[#path+1] = dir
-      pathcheck (table.concat(path, pathSeparator))
-    end
-    -- check or create subdirectories
-    for _,subdir in ipairs (subdirectories) do
-      pathcheck (target .. subdir)
-    end
-  end
+function GitHub (archive)     -- global for access by other modules
 
+  -- get and decode GitHub url
+  local function git_request (request)
+    local decoded, errmsg
+    local response = https.request (request)
+    if response then 
+      decoded, errmsg = json.decode (response)
+    else
+      errmsg = response
+    end
+    return decoded, errmsg
+  end
+  
   -- return a table of tagged releases, indexed by name, 
   -- with GitHub structure including commit info
   local function get_tags ()
-    _log "getting release versions from GitHub..."
     local tags
     local Ftag_request  = "https://api.github.com/repos/%s/tags"
     local resp, errmsg = git_request (Ftag_request: format (archive))
@@ -183,8 +159,6 @@ local function GitHub (archive, target)
       for _, x in ipairs (resp) do
         tags[x.name] = x
       end
-    else
-      _log (errmsg)
     end
     return tags, errmsg
   end
@@ -196,50 +170,43 @@ local function GitHub (archive, target)
     if not t then return nil, errmsg end
     for v in pairs (t) do tags[#tags+1] = v end
     table.sort (tags)
-    _log (table.concat (tags, ', '))
     local latest = tags[#tags]
     return latest
   end
   
-  -- get file given a GitHub file descriptor
-  local function get_file (x)
-    if not x then return end            -- used at end of iteration (no more files)
-    local fname = table.concat {target, x.name} 
-    local _, code, headers = https.request{
-        url = x.download_url,
-        sink = ltn12.sink.file(io.open(fname, "wb+"))
-      }
-    local content_length = headers and headers["content-length"] or 0 
-    return code, x.name, content_length   -- code = 200 is success
-  end
   
   -- get specific parts of tagged release
   local function get_release_by_file (v, subdirectories, pattern)
-    local ok = true
     local files, N = {}, 0
---    directory_check (subdirectories)
-    directory_check {''}          -- just the main directory
-    _log ("getting contents of version: " .. v)
+    local resp, errmsg
+    
+    -- iterator for each file we want
+    -- returns code, name, content
+    local function get_next_file ()
+      N = N+1
+      local x = files[N]
+      if not x then return end            -- used at end of iteration (no more files)
+      local content, code = https.request(x.download_url)
+      return code, x.name, content, N, #files   -- code = 200 is success
+    end
     
     for _, d in ipairs (subdirectories) do
-      _log ("...getting subdirectory: " .. d)
       local Fcontents = "https://api.github.com/repos/%s/contents"
       local request = table.concat {Fcontents: format (archive),d , "?ref=", v}
-      local resp, errmsg = git_request (request)
+      resp, errmsg = git_request (request)
       if resp then
   
         for _, x in ipairs (resp) do     -- x is a GitHub descriptor with name, path, etc...
           local wanted = (x.type == "file") and (x.name):match (pattern or '.') 
           if wanted then files[#files+1] = x end
         end
+      
       else
-        ok = false
-        _log (errmsg)
+        return nil, errmsg or "unknown error" 
       end
     end
-    _log ("Number of files to download: " .. N)
     
-    return function () N = N+1; return get_file (files[N]) end    -- iterator for each file we want
+    return get_next_file
   end
   
   -- GitHub()
@@ -255,7 +222,7 @@ end
 
 local _ = {
   NAME          = "openLuup.plugins",
-  VERSION       = "2016.06.08",
+  VERSION       = "2016.06.16",
   DESCRIPTION   = "create/delete plugins",
   AUTHOR        = "@akbooer",
   COPYRIGHT     = "(c) 2013-2016 AKBooer",
@@ -278,18 +245,18 @@ end
 -- check to see if plugin needs to install device(s)
 -- at the moment, only create the FIRST device in the list
 -- (multiple devices are a bit of a challenge to identify uniquely)
-local function install_if_missing (plugin)
-  local devices = plugin["Devices"] or {}
+local function install_if_missing (plugin, name)
+  local devices = plugin["Devices"] or plugin["devices"] or {}
   local device1 = devices[1] or {}
   local device_type = device1["DeviceType"]
   local device_file = device1["DeviceFileName"]
   local device_impl = device1["ImplFile"]
   local statevariables = device1["StateVariables"]
   local pluginnum = plugin.id
+  name = name or '?'
   
   local function install (plugin)
     local ip, mac, hidden, invisible, parent, room
-    local name = plugin.Title or '?'
     local altid = ''
     _log ("installing " .. name)
     -- device file comes from Devices structure
@@ -322,54 +289,10 @@ end
 
 -------------------------------------------------------
 --
--- use IPhoneLocator as test example
+-- AltAppStore's own metadata structure:
 --
 
-local IPhone =  
-  {
-    AllowMultiple   = "1",
-    Title           = "IPhoneLocator",
-    Icon            = "https://raw.githubusercontent.com/amg0/IPhoneLocator/master/iconIPhone.png", 
-    Instructions    = "https://github.com/amg0/IPhoneLocator",
-    AutoUpdate      = "0",
-    VersionMajor    = "not",
-    VersionMinor    = "installed",
-    id              = 4686,
---    timestamp       = os.time(),
-    Files           = {},
-    Devices         = {
-      {
-        DeviceFileName  = "D_IPhone.xml",
-        DeviceType      = "urn:schemas-upnp-org:device:IPhoneLocator:1",
-        ImplFile        = "I_IPhone.xml",
-        Invisible       =  "0",
---        CategoryNum = "1",
---        StateVariables = "..." -- see luup.create_device documentation
-      },
-    },
-    Repository      = {
-      {
-        type      = "GitHub",
-        source    = "amg0/IPhoneLocator",
-        default   = "master",                   -- "development" or "master" or any tagged release
-  --      folders = {                     -- these are the bits we need
-  --        "subdir1",
-  --        "subdir2",
-  --      },
-  --      pattern = "[DIJLS]_%w+%.%w+"     -- Lua pattern string to describe wanted files
-        pattern   = "IPhone",                   -- pattern match string for required files
-      },
-  -- other stuff can go here
-    }
-  }
-
-
--------------------------------------------------------
---
--- AltAppStore's own credentials
---
-
-local _ =  
+local AltAppStore =  
   {
     AllowMultiple   = "0",
     Title           = "AltAppStore",
@@ -395,7 +318,6 @@ local _ =
       {
         type      = "GitHub",
         source    = "akbooer/AltAppStore",
-        default   = "master",                   -- "development" or "master" or any tagged release
   --      folders = {                     -- these are the bits we need
   --        "subdir1",
   --        "subdir2",
@@ -403,7 +325,6 @@ local _ =
   --      pattern = "[DIJLS]_%w+%.%w+"     -- Lua pattern string to describe wanted files
         pattern   = "AltAppStore",                   -- pattern match string for required files
       },
-  -- other stuff can go here
     }
   }
 
@@ -420,37 +341,52 @@ local ipl         -- the plugin metadata
 local next_file   -- download iterator
 local target      -- location for downloads
 local total       -- total file transfer size
+local plugin_name
 
 function update_plugin_run(p)
   _log "starting <run> phase..."
-  p.metadata = p.metadata or json.encode (IPhone)     -- TESTING ONLY!
+  p.metadata = p.metadata or json.encode (AltAppStore)     -- TESTING ONLY!
   ipl = json.decode (p.metadata)
   
   if type (ipl) ~= "table" then 
-    _log "invalid plugin metadata"
+    _log "invalid metadata: JSON table decode error"
     return false                            -- failure
   end
   
-  local r
-  for _, repos in ipairs (ipl.Repository or {}) do
-    if repos and (repos.type == "GitHub") then r = repos break end  
-  end
-  if not (r and r.source) then 
-    _log "invalid repository metadata"
+  local r = ipl.repository
+  local v = ipl.versionid
+  
+  if not (r and v) then 
+    _log "invalid metadata: missing repository or versionid"
     return false
   end
   
-  target = table.concat {ludl_folder , "plugins", pathSeparator}
+  local t = r.type
+  local w = (r.versions or {}) [v] or {}
+  local rev = w.release
+  if not (t == "GitHub" and type(rev) == "string") then
+    _log "invalid metadata: missing GitHub release"
+    return false
+  end
+  
+  target = table.concat ({'', "tmp", "AltAppStore",''}, pathSeparator)
   lfs.mkdir (target)
-  local updater = GitHub (r.source, target)
-  
-  local rev = p.Version or r.default    -- a "default", for when the Update box has no entry
-  
-  _log ("downloading", ipl.id, "rev", rev) 
+  local updater = GitHub (r.source)
+    
+  _log ("downloading", r.source, '['..rev..']', "to", target) 
   local folders = r.folders or {''}    -- these are the bits of the repository that we want
-  next_file = updater.get_release_by_file (rev, folders, r.pattern) 
+  local info
+  next_file, info = updater.get_release_by_file (rev, folders, r.pattern) 
   
-  display ("Downloading...", ipl.Title or '?')
+  if not next_file then
+    _log ("error downloading:", info)
+    return false
+  end
+  
+  _log ("getting contents of version:", rev)
+  
+  plugin_name = r.source: match "/(.+)$" or r.source
+  display ("Downloading...", plugin_name)
   total = 0
   _log "starting <job> phase..."
   return true                               -- continue with <job>
@@ -471,23 +407,31 @@ local jobstate =  {
 
 function update_plugin_job()
   
-  local status, name, size = next_file()
+  local status, name, content, N, Nfiles = next_file()
   if status then
     if status ~= 200 then
-      _log "download failed"
+      _log ("download failed, status:", status)
       --tidy up
       return jobstate.Error,0
     end
-    local column = "%6d %s"
-    _log (column:format (size, name))
+    local f, err = io.open (target .. name, "wb")
+    if not f then 
+      _log ("failed writing", name, "with error", err)
+      return jobstate.Error,0
+    end
+    f: write (content)
+    f: close ()
+    local size = #content or 0
     total = total + size
+    local column = "(%d of %d) %6d %s"
+    _log (column:format (N, Nfiles, size, name))
     return jobstate.WaitingToStart,0        -- reschedule immediately
   else
     -- finish up
     _log ("Total size", total)
  
     -- copy files to final destination... 
-    _log ("updating icons in ", icon_folder, "...")
+    _log ("updating icons in", icon_folder, "...")
     _log ("updating device files in", ludl_folder, "...")
     for file in lfs.dir (target) do
       local source = target .. file
@@ -508,9 +452,9 @@ function update_plugin_job()
       end
     end
        
-    _log "update completed"
+    _log (plugin_name, "update completed")
     
-    install_if_missing (ipl)
+    install_if_missing (ipl, plugin_name)
     display ('Reload','required')
     return jobstate.Done,0        -- finished job
   end
@@ -522,23 +466,11 @@ end
 -- Alt App Store
 --
 
--- HTTP request handler
-function HTTP_AltAppStore (_, p)
-  local err, msg, job, arg = luup.call_action (SID.apps, "update_plugin", p, devNo)
-  err = tostring(err)
-  msg = tostring (msg)
-  job = tostring (json.encode (job))
-  arg = tostring (json.encode (arg))
-  local content = " status = %s\n message = %s\n job = %s\n arg = %s\n"
-  return content: format (err,msg,job, arg), "text/plain"
-end
-
 -- plugin initialisation
 function init (d)
   devNo = d
   
   _log "starting..."
-  luup.register_handler ("HTTP_AltAppStore", "update_plugin")
   display (ABOUT.NAME,'')
   
   setVar ("Version", ABOUT.VERSION)

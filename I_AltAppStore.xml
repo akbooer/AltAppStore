@@ -1,7 +1,21 @@
 <?xml version="1.0"?>
 <implementation>
-  <files>L_AltAppStore.lua</files>
-  <startup>init</startup>
+  <functions>
+  local update_plugin_run
+  local update_plugin_job
+  
+  -- the L_AltAppStore.lua file is invoked as a separate module
+  -- so that the implementation may be shared exactly with openLuup
+  -- which uses it for its bootstrap loading of AltUI and AltAppStore!
+  
+  function I_init (devNo)
+    local AltAppStore = require "L_AltAppStore"
+    update_plugin_run = AltAppStore.update_plugin_run
+    update_plugin_job = AltAppStore.update_plugin_job
+    return AltAppStore.init(devNo)
+  end
+  </functions>
+  <startup>I_init</startup>
   <actionList>
     <action>
   		<serviceId>urn:upnp-org:serviceId:AltAppStore1</serviceId>
