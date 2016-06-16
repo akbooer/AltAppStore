@@ -18,7 +18,7 @@
     <serviceList>
       <service>
         <serviceType>urn:schemas-upnp-org:service:AltAppStore:1</serviceType>
-        <serviceId>urn:schemas-upnp-org:serviceId:AltAppStore1</serviceId>
+        <serviceId>urn:upnp-org:serviceId:AltAppStore1</serviceId>
         <SCPDURL>S_AltAppStore.xml</SCPDURL>
       </service>
     </serviceList>
