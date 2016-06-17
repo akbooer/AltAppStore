@@ -28,16 +28,5 @@
   			return update_plugin_job (lul_settings)
   		</job>
     </action>
-    <action>
-  		<serviceId>urn:schemas-upnp-org:serviceId:AltAppStore1</serviceId>
-  		<name>update_plugin</name>
-  		<run>
-  			-- lul_device, lul_settings
-        return update_plugin_run (lul_settings)
-  		</run>
-  		<job>
-  			return update_plugin_job (lul_settings)
-  		</job>
-    </action>
   </actionList>
 </implementation>

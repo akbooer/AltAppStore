@@ -10,7 +10,7 @@ module ("L_AltAppStore", package.seeall)
 
 local ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.06.16",
+  VERSION       = "2016.06.17",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
   COPYRIGHT     = "(c) 2013-2016",
@@ -59,6 +59,8 @@ local ludl_folder = ludl_directories[(luup.version_minor == 0 ) or luup.version_
 local _log = function (...) luup.log (table.concat ({ABOUT.NAME, ':', ...}, ' ')) end
 
 local pathSeparator = '/'
+
+local Vera = not luup.attr_get "openLuup"
 
 -- utilities
 
@@ -255,7 +257,7 @@ local function install_if_missing (plugin, name)
   local pluginnum = plugin.id
   name = name or '?'
   
-  local function install (plugin)
+  local function install ()
     local ip, mac, hidden, invisible, parent, room
     local altid = ''
     _log ("installing " .. name)
@@ -267,7 +269,7 @@ local function install_if_missing (plugin, name)
   
   local devNo
   if device_type and not present (device_type) then 
-    devNo = install(plugin) 
+    devNo = install() 
   end
   return devNo
 end
@@ -287,9 +289,30 @@ local function file_copy (source, destination)
   end
 end
 
+--[[
 -------------------------------------------------------
 --
--- AltAppStore's own metadata structure:
+-- THIS IS THE METADATA FROM THE APP STORE ACTION REQUEST
+--
+
+metadata: JSON.stringify({
+	plugin: {
+		id: plugin.id,
+		Title: plugin.Title,
+		Description: plugin.Description,
+		Icon: plugin.Icon,
+		Instructions: plugin.Instructions,
+		AllowMultiple: plugin.AllowMultiple,
+		AutoUpdate: plugin.AutoUpdate
+	},
+	repository: repo,
+	devices: plugin.Devices,
+	versionid: versionid
+})
+
+-------------------------------------------------------
+--
+-- AltAppStore's own InstalledPlugins2 structure:
 --
 
 local AltAppStore =  
@@ -328,6 +351,37 @@ local AltAppStore =
     }
   }
 
+--]]
+
+-- update the relevant data for the Plugins page, creating new entry if required
+local function update_InstalledPlugins2 (meta, files)
+
+  local IP2 = luup.attr_get "InstalledPlugins2"
+  if not IP2 then return end
+  
+  -- find the plugin in IP2, if present
+  local id = meta.plugin.id 
+  local plugin
+  for _,p in ipairs (IP2) do
+    if id == tostring (p.id) then
+      plugin = p
+      break
+    end
+  end
+  
+  -- create new entry if required
+  if not plugin then
+    plugin = meta.plugin
+    IP2[#IP2+1] = plugin
+  end
+  
+  -- update fields
+  plugin.files = files or {}
+  plugin.Devices = meta.devices
+  plugin.Repository = meta.repository
+  
+  plugin.versionid = meta.versionid   -- TODO: extract necessary data
+end
 
 -------------------------------------------------------
 --
@@ -337,27 +391,29 @@ local AltAppStore =
 --
 
 -- these variables are shared between the two phases...
-local ipl         -- the plugin metadata
+local meta         -- the plugin metadata
 local next_file   -- download iterator
 local target      -- location for downloads
 local total       -- total file transfer size
 local plugin_name
 
-function update_plugin_run(p)
+function update_plugin_run(args)
   _log "starting <run> phase..."
-  p.metadata = p.metadata or json.encode (AltAppStore)     -- TESTING ONLY!
-  ipl = json.decode (p.metadata)
+--  p.metadata = p.metadata or json.encode (AltAppStore)     -- TESTING ONLY!
+  meta = json.decode (args.metadata)
   
-  if type (ipl) ~= "table" then 
+  if type (meta) ~= "table" then 
     _log "invalid metadata: JSON table decode error"
     return false                            -- failure
   end
   
-  local r = ipl.repository
-  local v = ipl.versionid
+  local d = meta.devices
+  local p = meta.plugin
+  local r = meta.repository
+  local v = meta.versionid
   
-  if not (r and v) then 
-    _log "invalid metadata: missing repository or versionid"
+  if not (d and p and r and v) then 
+    _log "invalid metadata: missing repository, plugin, devices, or versionid"
     return false
   end
   
@@ -430,9 +486,14 @@ function update_plugin_job()
     -- finish up
     _log ("Total size", total)
  
-    -- copy files to final destination... 
+    -- copy/compress files to final destination... 
     _log ("updating icons in", icon_folder, "...")
-    _log ("updating device files in", ludl_folder, "...")
+    if Vera then
+      _log ("compressing device files in", ludl_folder, "...")
+    else
+      _log ("updating device files in", ludl_folder, "...")
+    end
+    
     for file in lfs.dir (target) do
       local source = target .. file
       local attributes = lfs.attributes (source)
@@ -440,21 +501,27 @@ function update_plugin_job()
         local destination
         if file:match ".+%.png$" then    -- ie. *.png
           destination = icon_folder .. file
+          file_copy (source, destination)
         else
           destination = ludl_folder .. file
           local compressed_file = destination .. ".lzo"
-          if lfs.attributes (compressed_file) then   
-            os.remove (compressed_file)    -- remove existing compressed file
+--          if lfs.attributes (compressed_file) then   
+--            os.remove (compressed_file)    -- remove existing compressed file
+--          end
+          if Vera then   
+            os.execute (table.concat ({"pluto-lzo c", source, compressed_file}, ' '))
+          else
+            file_copy (source, destination)
           end
         end
-        file_copy (source, destination)
         os.remove (source)
       end
     end
        
     _log (plugin_name, "update completed")
     
-    install_if_missing (ipl, plugin_name)
+    install_if_missing (meta, plugin_name)
+    if not Vera then update_InstalledPlugins2 (meta) end
     display ('Reload','required')
     return jobstate.Done,0        -- finished job
   end
@@ -468,11 +535,9 @@ end
 
 -- plugin initialisation
 function init (d)
-  devNo = d
-  
-  _log "starting..."
-  display (ABOUT.NAME,'')
-  
+  devNo = d  
+  _log "starting..." 
+  display (ABOUT.NAME,'')  
   setVar ("Version", ABOUT.VERSION)
   set_failure (0)
   return true, "OK", ABOUT.NAME
