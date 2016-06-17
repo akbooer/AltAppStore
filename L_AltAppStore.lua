@@ -224,7 +224,7 @@ end
 
 local _ = {
   NAME          = "openLuup.plugins",
-  VERSION       = "2016.06.16",
+  VERSION       = "2016.06.17",
   DESCRIPTION   = "create/delete plugins",
   AUTHOR        = "@akbooer",
   COPYRIGHT     = "(c) 2013-2016 AKBooer",
@@ -307,7 +307,7 @@ metadata: JSON.stringify({
 	},
 	repository: repo,
 	devices: plugin.Devices,
-	versionid: versionid
+	version: {major = 1, minor = 2}
 })
 
 -------------------------------------------------------
@@ -360,7 +360,7 @@ local function update_InstalledPlugins2 (meta, files)
   if not IP2 then return end
   
   -- find the plugin in IP2, if present
-  local id = meta.plugin.id 
+  local id = tostring(meta.plugin.id) 
   local plugin
   for _,p in ipairs (IP2) do
     if id == tostring (p.id) then
@@ -380,7 +380,8 @@ local function update_InstalledPlugins2 (meta, files)
   plugin.Devices = meta.devices
   plugin.Repository = meta.repository
   
-  plugin.versionid = meta.versionid   -- TODO: extract necessary data
+  plugin.VersionMajor = meta.version.major or '?'
+  plugin.VersionMinor = meta.version.minor or '?'
 end
 
 -------------------------------------------------------
@@ -410,7 +411,7 @@ function update_plugin_run(args)
   local d = meta.devices
   local p = meta.plugin
   local r = meta.repository
-  local v = meta.versionid
+  local v = meta.version
   
   if not (d and p and r and v) then 
     _log "invalid metadata: missing repository, plugin, devices, or versionid"
@@ -418,7 +419,7 @@ function update_plugin_run(args)
   end
   
   local t = r.type
-  local w = (r.versions or {}) [v] or {}
+  local _, w = next (r.versions or {})
   local rev = w.release
   if not (t == "GitHub" and type(rev) == "string") then
     _log "invalid metadata: missing GitHub release"
@@ -441,7 +442,7 @@ function update_plugin_run(args)
   
   _log ("getting contents of version:", rev)
   
-  plugin_name = r.source: match "/(.+)$" or r.source
+  plugin_name = p.Title or r.source: match "/(.+)$" or r.source
   display ("Downloading...", plugin_name)
   total = 0
   _log "starting <job> phase..."
