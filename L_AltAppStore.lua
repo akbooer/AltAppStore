@@ -247,15 +247,15 @@ end
 -- check to see if plugin needs to install device(s)
 -- at the moment, only create the FIRST device in the list
 -- (multiple devices are a bit of a challenge to identify uniquely)
-local function install_if_missing (plugin, name)
-  local devices = plugin["Devices"] or plugin["devices"] or {}
+local function install_if_missing (meta)
+  local devices = meta["Devices"] or meta["devices"] or {}
   local device1 = devices[1] or {}
   local device_type = device1["DeviceType"]
   local device_file = device1["DeviceFileName"]
   local device_impl = device1["ImplFile"]
   local statevariables = device1["StateVariables"]
-  local pluginnum = plugin.id
-  name = name or '?'
+  local pluginnum = meta.id
+  local name = meta.plugin.Title or '?'
   
   local function install ()
     local ip, mac, hidden, invisible, parent, room
@@ -295,20 +295,35 @@ end
 -- THIS IS THE METADATA FROM THE APP STORE ACTION REQUEST
 --
 
-metadata: JSON.stringify({
-	plugin: {
-		id: plugin.id,
-		Title: plugin.Title,
-		Description: plugin.Description,
-		Icon: plugin.Icon,
-		Instructions: plugin.Instructions,
-		AllowMultiple: plugin.AllowMultiple,
-		AutoUpdate: plugin.AutoUpdate
-	},
-	repository: repo,
-	devices: plugin.Devices,
-	version: {major = 1, minor = 2}
-})
+
+  metadata: JSON.stringify({
+    plugin: {
+      id: plugin.id,
+      Title: plugin.Title,
+      Description: plugin.Description,
+      Icon: plugin.Icon,
+      Instructions: plugin.Instructions,
+      AllowMultiple: plugin.AllowMultiple,
+      AutoUpdate: plugin.AutoUpdate
+    },
+    repository: repo,							//  [
+      {
+        "type":"GitHub",
+        "source":"amg0/IPhoneLocator",
+        "pattern":"IPhone",
+        "versions":{
+          "2":{"release":"master"}
+        }
+      },{
+        "type":"Vera",
+        "versions":{
+          "1":{"release":"31718"}
+        }
+      }]
+    devices: plugin.Devices,					// [{  "DeviceFileName":"D_Netatmo.xml",  "DeviceType":"urn:akbooer-com:device:Netatmo:1",  "ImplFile":"I_Netatmo.xml",  "Invisible":"0"}]
+    version: plugin.Versions[ versionid ]	,	//  {"major":15,"minor":"0130"}
+    versionid: versionid
+  })
 
 -------------------------------------------------------
 --
@@ -376,7 +391,7 @@ local function update_InstalledPlugins2 (meta, files)
   end
   
   -- update fields
-  plugin.files = files or {}
+  plugin.Files = files or {}
   plugin.Devices = meta.devices
   plugin.Repository = meta.repository
   
@@ -392,11 +407,11 @@ end
 --
 
 -- these variables are shared between the two phases...
-local meta         -- the plugin metadata
+local meta        -- the plugin metadata
 local next_file   -- download iterator
 local target      -- location for downloads
 local total       -- total file transfer size
-local plugin_name
+local files       -- files list
 
 function update_plugin_run(args)
   _log "starting <run> phase..."
@@ -419,7 +434,7 @@ function update_plugin_run(args)
   end
   
   local t = r.type
-  local _, w = next (r.versions or {})
+  local w = (r.versions or {}) [meta.versionid] or {}
   local rev = w.release
   if not (t == "GitHub" and type(rev) == "string") then
     _log "invalid metadata: missing GitHub release"
@@ -442,9 +457,9 @@ function update_plugin_run(args)
   
   _log ("getting contents of version:", rev)
   
-  plugin_name = p.Title or r.source: match "/(.+)$" or r.source
-  display ("Downloading...", plugin_name)
+  display ("Downloading...", p.Title or '?')
   total = 0
+  files = {}
   _log "starting <job> phase..."
   return true                               -- continue with <job>
 end
@@ -480,6 +495,7 @@ function update_plugin_job()
     f: close ()
     local size = #content or 0
     total = total + size
+    files[#files+1] = {SourceName = name}
     local column = "(%d of %d) %6d %s"
     _log (column:format (N, Nfiles, size, name))
     return jobstate.WaitingToStart,0        -- reschedule immediately
@@ -519,10 +535,10 @@ function update_plugin_job()
       end
     end
        
-    _log (plugin_name, "update completed")
+    _log (meta.plugin.Title or '?', "update completed")
     
-    install_if_missing (meta, plugin_name)
-    if not Vera then update_InstalledPlugins2 (meta) end
+    install_if_missing (meta)
+    if not Vera then update_InstalledPlugins2 (meta, files) end
     display ('Reload','required')
     return jobstate.Done,0        -- finished job
   end
