@@ -1,4 +1,12 @@
-module ("L_AltAppStore", package.seeall)
+
+local ABOUT = {
+  NAME          = "AltAppStore",
+  VERSION       = "2016.06.21",
+  DESCRIPTION   = "update plugins from Alternative App Store",
+  AUTHOR        = "@akbooer / @amg0 / @vosmont",
+  COPYRIGHT     = "(c) 2013-2016",
+  DOCUMENTATION = "https://github.com/akbooer/AltAppStore",
+}
 
 -- // This program is free software: you can redistribute it and/or modify
 -- // it under the condition that it is for private or home useage and 
@@ -8,27 +16,43 @@ module ("L_AltAppStore", package.seeall)
 -- // but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE . 
 
-local ABOUT = {
-  NAME          = "AltAppStore",
-  VERSION       = "2016.06.17",
-  DESCRIPTION   = "update plugins from Alternative App Store",
-  AUTHOR        = "@akbooer / @amg0 / @vosmont",
-  COPYRIGHT     = "(c) 2013-2016",
-  DOCUMENTATION = "https://github.com/akbooer/AltAppStore",
-}
-
--- Plugin for Vera
+-- Plugin for Vera and openLuup
 --
--- a collaborative effort:
+-- The Alternative App Store is a collaborative effort:
 --   Web:      @vosmont
 --   (Alt)UI:  @amg0
 --   Plugin:   @akbooer
 --
+--[[
+
+From the AltAppStore Web page in AltUI, you get an action request to the AltAppStore plugin:
+
+/data_request?id=action
+  &output_format=json
+  &DeviceNum=4&serviceId=urn:upnp-org:serviceId:AltAppStore1
+  &action=update_plugin
+  &metadata={...URL escaped.. JSON string...}
+
+The metadata structure is complex (see below, it is, after all, developed by committee) 
+and partially modelled on the InstalledPlugins2 structure in Vera user_data.
+
+--]]
+
+-- 2016.06.20   use optional target repository parameter for final download destination
+-- 2016.06.21   luup.create_device didn't work for UI7, so use action call for all systems
 
 local https     = require "ssl.https"
 local lfs       = require "lfs"
 
-local json      = require "L_ALTUIjson"   -- we will always run with AltUI present
+local json
+local Vera = luup.attr_get "SvnVersion"
+
+if Vera then
+  json = require "L_ALTUIjson"    -- we will always run with AltUI present
+else
+  json = require "openLuup.json"  -- AltUI may NOT be present (eg. before it's installed)
+end
+
 
 https.TIMEOUT = 5
 
@@ -60,8 +84,6 @@ local _log = function (...) luup.log (table.concat ({ABOUT.NAME, ':', ...}, ' ')
 
 local pathSeparator = '/'
 
-local Vera = not luup.attr_get "openLuup"
-
 -- utilities
 
 local function setVar (name, value, service, device)
@@ -86,7 +108,7 @@ end
 
 -- UI5 doesn't have the luup.create_device function!
 
-local function UI5_create_device (device_type, altid, name, device_file, 
+local function create_device (device_type, altid, name, device_file, 
       device_impl, ip, mac, hidden, invisible, parent, room, pluginnum, statevariables)  
   local _ = {hidden, invisible}   -- unused
   -- do appreciate the following naming inconsistencies which Luup enjoys... 
@@ -219,17 +241,11 @@ function GitHub (archive)     -- global for access by other modules
   }
 end
 
- 
+--
+-- End of gitHub module
+--
 -------------------------------------------------------
 
-local _ = {
-  NAME          = "openLuup.plugins",
-  VERSION       = "2016.06.17",
-  DESCRIPTION   = "create/delete plugins",
-  AUTHOR        = "@akbooer",
-  COPYRIGHT     = "(c) 2013-2016 AKBooer",
-  DOCUMENTATION = "https://github.com/akbooer/openLuup/tree/master/Documentation",
-}
 
 -- utilities
 
@@ -237,7 +253,8 @@ local _ = {
 -- return first found device ID if a device of the given type is present locally
 local function present (device_type)
   for devNo, d in pairs (luup.devices) do
-    if (d.device_num_parent == 0)     -- local device!!
+    if ((d.device_num_parent == 0)      -- local device...
+    or  (d.device_num_parent == 2))     -- ...or child of openLuup device
     and (d.device_type == device_type) then
       return devNo
     end
@@ -261,8 +278,7 @@ local function install_if_missing (meta)
     local ip, mac, hidden, invisible, parent, room
     local altid = ''
     _log ("installing " .. name)
-    -- device file comes from Devices structure
-    local devNo = (luup.create_device or UI5_create_device) (device_type, altid, name, device_file, 
+    local devNo =  create_device (device_type, altid, name, device_file, 
       device_impl, ip, mac, hidden, invisible, parent, room, pluginnum, statevariables)  
     return devNo
   end
@@ -292,38 +308,38 @@ end
 --[[
 -------------------------------------------------------
 --
--- THIS IS THE METADATA FROM THE APP STORE ACTION REQUEST
+-- THIS IS EXAMPLE METADATA FROM THE APP STORE ACTION REQUEST
 --
 
-
-  metadata: JSON.stringify({
-    plugin: {
-      id: plugin.id,
-      Title: plugin.Title,
-      Description: plugin.Description,
-      Icon: plugin.Icon,
-      Instructions: plugin.Instructions,
-      AllowMultiple: plugin.AllowMultiple,
-      AutoUpdate: plugin.AutoUpdate
-    },
-    repository: repo,							//  [
-      {
-        "type":"GitHub",
-        "source":"amg0/IPhoneLocator",
-        "pattern":"IPhone",
-        "versions":{
-          "2":{"release":"master"}
-        }
-      },{
-        "type":"Vera",
-        "versions":{
-          "1":{"release":"31718"}
-        }
-      }]
-    devices: plugin.Devices,					// [{  "DeviceFileName":"D_Netatmo.xml",  "DeviceType":"urn:akbooer-com:device:Netatmo:1",  "ImplFile":"I_Netatmo.xml",  "Invisible":"0"}]
-    version: plugin.Versions[ versionid ]	,	//  {"major":15,"minor":"0130"}
-    versionid: versionid
-  })
+{
+  devices = {{
+      DeviceFileName = "ALTUI",
+      DeviceType = "D_ALTUI.xml",
+      ImplFile = "I_ALTUI.xml",
+      Invisible = "0"
+    }},
+  plugin = {
+    AllowMultiple = 0,
+    AutoUpdate = 1,
+    Description = "Alternate user interface and feature set extension for VERA & openLuup",
+    Icon = "https://apps.mios.com/plugins/icons/8246.png",
+    Instructions = "http://forum.micasaverde.com/index.php/topic,33309.0.html",
+    Title = "ALTUI",
+    id = 8246
+  },
+  repository = {
+    folders = {""},
+    pattern = "[DIJLS]_ALTUI%w*%.%w+",
+    source = "amg0/ALTUI",
+    type = "GitHub",
+    versions = {["2"] = {release = "1763"}}
+  },
+  version = {
+    major = "1",
+    minor = "58.1763"
+  },
+  versionid = "2"
+}
 
 -------------------------------------------------------
 --
@@ -366,13 +382,14 @@ local AltAppStore =
     }
   }
 
+
 --]]
 
 -- update the relevant data for the Plugins page, creating new entry if required
 local function update_InstalledPlugins2 (meta, files)
 
   local IP2 = luup.attr_get "InstalledPlugins2"
-  if not IP2 then return end
+  if type(IP2) ~="table" then return end
   
   -- find the plugin in IP2, if present
   local id = tostring(meta.plugin.id) 
@@ -409,7 +426,7 @@ end
 -- these variables are shared between the two phases...
 local meta        -- the plugin metadata
 local next_file   -- download iterator
-local target      -- location for downloads
+local downloads      -- location for downloads
 local total       -- total file transfer size
 local files       -- files list
 
@@ -441,11 +458,11 @@ function update_plugin_run(args)
     return false
   end
   
-  target = table.concat ({'', "tmp", "AltAppStore",''}, pathSeparator)
-  lfs.mkdir (target)
+  downloads = table.concat ({'', "tmp", "AltAppStore",''}, pathSeparator)
+  lfs.mkdir (downloads)
   local updater = GitHub (r.source)
     
-  _log ("downloading", r.source, '['..rev..']', "to", target) 
+  _log ("downloading", r.source, '['..rev..']', "to", downloads) 
   local folders = r.folders or {''}    -- these are the bits of the repository that we want
   local info
   next_file, info = updater.get_release_by_file (rev, folders, r.pattern) 
@@ -486,7 +503,7 @@ function update_plugin_job()
       --tidy up
       return jobstate.Error,0
     end
-    local f, err = io.open (target .. name, "wb")
+    local f, err = io.open (downloads .. name, "wb")
     if not f then 
       _log ("failed writing", name, "with error", err)
       return jobstate.Error,0
@@ -504,15 +521,12 @@ function update_plugin_job()
     _log ("Total size", total)
  
     -- copy/compress files to final destination... 
+    local target = meta.repository.target or ludl_folder
     _log ("updating icons in", icon_folder, "...")
-    if Vera then
-      _log ("compressing device files in", ludl_folder, "...")
-    else
-      _log ("updating device files in", ludl_folder, "...")
-    end
+    _log ("updating device files in", target, "...")
     
-    for file in lfs.dir (target) do
-      local source = target .. file
+    for file in lfs.dir (downloads) do
+      local source = downloads .. file
       local attributes = lfs.attributes (source)
       if file: match "^[^%.]" and attributes.mode == "file" then
         local destination
@@ -520,13 +534,9 @@ function update_plugin_job()
           destination = icon_folder .. file
           file_copy (source, destination)
         else
-          destination = ludl_folder .. file
-          local compressed_file = destination .. ".lzo"
---          if lfs.attributes (compressed_file) then   
---            os.remove (compressed_file)    -- remove existing compressed file
---          end
+          destination = target .. file
           if Vera then   
-            os.execute (table.concat ({"pluto-lzo c", source, compressed_file}, ' '))
+            os.execute (table.concat ({"pluto-lzo c", source, destination .. ".lzo"}, ' '))
           else
             file_copy (source, destination)
           end
@@ -535,10 +545,10 @@ function update_plugin_job()
       end
     end
        
+    update_InstalledPlugins2 (meta, files)
     _log (meta.plugin.Title or '?', "update completed")
     
     install_if_missing (meta)
-    if not Vera then update_InstalledPlugins2 (meta, files) end
     display ('Reload','required')
     return jobstate.Done,0        -- finished job
   end
@@ -551,7 +561,7 @@ end
 --
 
 -- plugin initialisation
-function init (d)
+function AltAppStore_init (d)
   devNo = d  
   _log "starting..." 
   display (ABOUT.NAME,'')  
@@ -559,6 +569,6 @@ function init (d)
   set_failure (0)
   return true, "OK", ABOUT.NAME
 end
- 
+
 -----
 
