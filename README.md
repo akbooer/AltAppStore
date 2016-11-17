@@ -41,8 +41,8 @@ VersionMinor	|ditto
 
 |Parameter|Function |
 |---------|---------|
-pattern	|this may be blank, but otherwise contains a Lua string pattern which matches ALL the files you want to download from your GitHub repository, which often contains lots of other things (documentation, licence, folders, ...) which you don't want to download.  If you have a bit of discipline in naming your files (eg. AltUI files all contain "ALTUI") then this is easy.  If you stick to the traditional Vera naming convention for device files, then this can be "[DIJLS]_%w+%.%w+"
-source	|a string of the form "amg0/ALTUI", being simply <your username>/<your GitHub repository for the plugin>
+pattern	|this may be blank, but otherwise contains a Lua string pattern which matches ALL the files you want to download from your GitHub repository, which often contains lots of other things (documentation, licence, folders, ...) which you don't want to download.  If you have a bit of discipline in naming your files (eg. AltUI files all contain "ALTUI") then this is easy.  If you stick to the traditional Vera naming convention for device files, then this can be `"[DIJLS]_%w+%.%w+"`
+source	|a string of the form "amg0/ALTUI", being simply `<your username>/<your GitHub repository for the plugin>`
 folders	|this may be blank, in which case the files matching the pattern (above) are downloaded from the root folder of the repository.  However, multiple folders may also be defined, the top level one being simply "".  Example: "luup_files, more_files" or even  ",subfolder" for top level + subfolder
 release	|release name or GitHub tag or branch name
 
