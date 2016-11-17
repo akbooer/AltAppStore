@@ -5,7 +5,7 @@ From release v1.58.1763 of AltUI, you now have an alternative way to install and
 or openLuup systems.
 
 AltAppStore is part of a normal openLuup install, but since it is not in the MiOS app store, an initial manual 
-installation is required on UI5 or UI7 systems.  A Lua script file `AltAppStore_install.lua`, which should be run in Vera's 
+installation is required on UI5 or UI7 systems.  A Lua script file `altappstore_install.lua`, which should be run in Vera's 
 Lua Test Code window, is part of this repository.
 
 ## Publishing a Plugin in the AltAppStore
