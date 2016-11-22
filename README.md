@@ -33,7 +33,7 @@ VersionMinor	|ditto
 |Parameter|Function |
 |---------|---------|
 |DeviceFilename	|UPnP Device `D_xxx.xml` file
-|DeviceType	|UPnP Device type, eg. `urn:schemas-upnp-org:device:altui:1`
+|DeviceType	|UPnP Device type, eg. `urn:schemas-upnp-org:device:altui:1`.  NB: _very important that this type matches that used in the device.xml file_
 |ImplFile	|UPnP Implementation `I_xxx.xml` file
 |Invisible	|0 or 1 flag indicating device visibility (keep this 0)
 
@@ -51,3 +51,15 @@ release	|release name or GitHub tag or branch name
 |Parameter|Function |
 |---------|---------|
 release	| MCV version number, See the attached screen to determine the version number of your plugin version in MCV store...
+
+##Other points to note
+
+`AltUI` itself doesn't have access to the MiOS store.  Whilst it can get information on plugins which are already installed on Vera, it has no way of knowing the plugin id of any other one.  That's all it needs to tell Vera to fetch it.  This is the function of the `Vera` download button in the store.
+
+`openLuuup`, on the other hand, has no way at all of accessing the MiOS store (it can access to the MiOS Trac repository for some some plugins, indeed, AltUI itself was originally fetched from there) so there needs to be another way...
+
+`AltAppStore` can download files from a GitHub repository to either Vera or openLuup using the Alt button.  Aside from the pre-installed plugins in openLuup, this is the only automatic way to download new plugins to openLuup.
+
+The store has a side-benefit for Vera-only developers, since publication is immediate, and there is no indeterminate wait for the new version to be approved.  Also, if you think that the AltAppStore configuration is convoluted, you should try publishing through the MiOS store... 
+
+Once AltAppStore has a plugin configured you can almost forget about it, unless you want to update your pull-down menu for new tagged releases.  Also, once loaded, there's enough information for openLuup to update from GitHub directly, without the intervention of the store.  Simply press the `Update` button on the plugin page against a particular plugin.  If you know the repository organization, you can also specify, via the `Update box`, a particular branch (eg. "master", "development", ...) or tagged release (eg. "v1.1") before clicking the Update button.
