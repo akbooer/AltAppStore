@@ -1,9 +1,9 @@
 ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.08.31",
+  VERSION       = "2018.02.24",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
-  COPYRIGHT     = "(c) 2013-2016",
+  COPYRIGHT     = "(c) 2013-2018",
   DOCUMENTATION = "https://github.com/akbooer/AltAppStore",
 }
 
@@ -40,9 +40,15 @@ and partially modelled on the InstalledPlugins2 structure in Vera user_data.
 -- 2016.06.20   use optional target repository parameter for final download destination
 -- 2016.06.21   luup.create_device didn't work for UI7, so use action call for all systems
 -- 2016.06.22   slightly better log messages for <run> and <job> phases, add test request argument
+-- 2016.11.23   don't allow spaces in pathnames
+--              see: http://forum.micasaverde.com/index.php/topic,40406.msg299810.html#msg299810
+
+-- 2018.02.24   upgrade SSL encryption to tls v1.2 after GitHub deprecation of v1 protocol
+
 
 local https     = require "ssl.https"
 local lfs       = require "lfs"
+local ltn12     = require "ltn12"
 
 local json
 local Vera = luup.attr_get "SvnVersion"
@@ -161,16 +167,40 @@ local _ = {
 function GitHub (archive)     -- global for access by other modules
 
   -- get and decode GitHub url
+
   local function git_request (request)
-    local decoded, errmsg
-    local response = https.request (request)
-    if response then 
+    local decoded
+    local response = {}
+    local errmsg
+    local r, c, h, s = https.request {
+      url = request,
+      sink = ltn12.sink.table(response),
+      protocol = "tlsv1_2"
+    }
+    response = table.concat (response)
+    _log ("GitHub request: " .. request)
+    if r then 
       decoded, errmsg = json.decode (response)
     else
-      errmsg = response
+      errmsg = c
+      _log ("ERROR: " .. (errmsg or "unknown"))
     end
     return decoded, errmsg
   end
+
+--  local function git_request (request)
+--    local decoded
+--    local response, errmsg = https.request (request)
+--    _log ("GitHub request: " .. request)
+--    if response then 
+--      decoded, errmsg = json.decode (response)
+--    else
+--      _log ("ERROR: " .. (errmsg or "unknown"))
+--      errmsg = response
+--    end
+--    return decoded, errmsg
+--  end
+  
   
   -- return a table of tagged releases, indexed by name, 
   -- with GitHub structure including commit info
@@ -215,6 +245,7 @@ function GitHub (archive)     -- global for access by other modules
     
     for _, d in ipairs (subdirectories) do
       local Fcontents = "https://api.github.com/repos/%s/contents"
+      local dir = d: match "%S+"    -- 2016.11.23  non-spaces
       local request = table.concat {Fcontents: format (archive),d , "?ref=", v}
       resp, errmsg = git_request (request)
       if resp then

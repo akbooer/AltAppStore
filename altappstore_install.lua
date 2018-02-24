@@ -1,6 +1,8 @@
 -- first-time download and install ofAltAppStore files from GitHub
 -- this code should be run on a Vera in the Lua Test Code window
 -- 2016.11.16 @akbooer
+-- 2018.02.24 upgrade SSL encryption to tls v1.2 after GitHub deprecation of v1 protocol
+
 
 local x = os.execute
 local p = print
@@ -14,7 +16,8 @@ p "getting latest AltAppStore version tar file from GitHub..."
 
 local _, code = https.request{
   url = "https://codeload.github.com/akbooer/AltAppStore/tar.gz/master",
-  sink = ltn12.sink.file(io.open("/tmp/altappstore.tar.gz", "wb"))
+  sink = ltn12.sink.file(io.open("/tmp/altappstore.tar.gz", "wb")),
+  protocol = "tlsv1_2",
 }
 
 assert (code == 200, "GitHub download failed with code " .. code)
