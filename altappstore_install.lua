@@ -7,7 +7,7 @@
 local x = os.execute
 local p = print
 
-p "AltAppStore_install   2016.11.16   @akbooer"
+p "AltAppStore_install   2018.02.24   @akbooer"
 
 local https = require "ssl.https"
 local ltn12 = require "ltn12"
