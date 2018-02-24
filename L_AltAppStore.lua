@@ -1,10 +1,9 @@
-
-local ABOUT = {
+ABOUT = {
   NAME          = "AltAppStore",
-  VERSION       = "2016.06.24",
+  VERSION       = "2018.02.24",
   DESCRIPTION   = "update plugins from Alternative App Store",
   AUTHOR        = "@akbooer / @amg0 / @vosmont",
-  COPYRIGHT     = "(c) 2013-2016",
+  COPYRIGHT     = "(c) 2013-2018",
   DOCUMENTATION = "https://github.com/akbooer/AltAppStore",
 }
 
@@ -19,9 +18,9 @@ local ABOUT = {
 -- Plugin for Vera and openLuup
 --
 -- The Alternative App Store is a collaborative effort:
---   Web:      @vosmont
---   (Alt)UI:  @amg0
---   Plugin:   @akbooer
+--   Web/database:  @vosmont
+--   (Alt)UI:       @amg0
+--   Plugin:        @akbooer
 --
 --[[
 
@@ -40,10 +39,16 @@ and partially modelled on the InstalledPlugins2 structure in Vera user_data.
 
 -- 2016.06.20   use optional target repository parameter for final download destination
 -- 2016.06.21   luup.create_device didn't work for UI7, so use action call for all systems
--- 2016.06.22   slightly better log messages for <run> and <job> phases
+-- 2016.06.22   slightly better log messages for <run> and <job> phases, add test request argument
+-- 2016.11.23   don't allow spaces in pathnames
+--              see: http://forum.micasaverde.com/index.php/topic,40406.msg299810.html#msg299810
+
+-- 2018.02.24   upgrade SSL encryption to tls v1.2 after GitHub deprecation of v1 protocol
+
 
 local https     = require "ssl.https"
 local lfs       = require "lfs"
+local ltn12     = require "ltn12"
 
 local json
 local Vera = luup.attr_get "SvnVersion"
@@ -68,7 +73,7 @@ local SID = {
 local icon_directories = {
   [true] = "icons/",                                            -- openLuup icons
   [5] = "/www/cmh/skins/default/icons/",                        -- UI5 icons
-  [6] = nil,                                                    -- TODO: discover where UI6 icons go
+  [6] = "/www/cmh_ui6/skins/default/icons/",                    -- UI6 icons, thanks to @reneboer for this information
   [7] = "/www/cmh/skins/default/img/devices/device_states/",    -- UI7 icons
 }
 
@@ -162,16 +167,40 @@ local _ = {
 function GitHub (archive)     -- global for access by other modules
 
   -- get and decode GitHub url
+
   local function git_request (request)
-    local decoded, errmsg
-    local response = https.request (request)
-    if response then 
+    local decoded
+    local response = {}
+    local errmsg
+    local r, c, h, s = https.request {
+      url = request,
+      sink = ltn12.sink.table(response),
+      protocol = "tlsv1_2"
+    }
+    response = table.concat (response)
+    _log ("GitHub request: " .. request)
+    if r then 
       decoded, errmsg = json.decode (response)
     else
-      errmsg = response
+      errmsg = c
+      _log ("ERROR: " .. (errmsg or "unknown"))
     end
     return decoded, errmsg
   end
+
+--  local function git_request (request)
+--    local decoded
+--    local response, errmsg = https.request (request)
+--    _log ("GitHub request: " .. request)
+--    if response then 
+--      decoded, errmsg = json.decode (response)
+--    else
+--      _log ("ERROR: " .. (errmsg or "unknown"))
+--      errmsg = response
+--    end
+--    return decoded, errmsg
+--  end
+  
   
   -- return a table of tagged releases, indexed by name, 
   -- with GitHub structure including commit info
@@ -199,7 +228,6 @@ function GitHub (archive)     -- global for access by other modules
     return latest
   end
   
-  
   -- get specific parts of tagged release
   local function get_release_by_file (v, subdirectories, pattern)
     local files, N = {}, 0
@@ -217,6 +245,7 @@ function GitHub (archive)     -- global for access by other modules
     
     for _, d in ipairs (subdirectories) do
       local Fcontents = "https://api.github.com/repos/%s/contents"
+      local dir = d: match "%S+"    -- 2016.11.23  non-spaces
       local request = table.concat {Fcontents: format (archive),d , "?ref=", v}
       resp, errmsg = git_request (request)
       if resp then
@@ -243,7 +272,7 @@ function GitHub (archive)     -- global for access by other modules
 end
 
 --
--- End of gitHub module
+-- End of GitHub module
 --
 -------------------------------------------------------
 
@@ -429,10 +458,19 @@ local next_file   -- download iterator
 local downloads      -- location for downloads
 local total       -- total file transfer size
 local files       -- files list
+local test
 
 function update_plugin_run(args)
-  _log "starting <run> phase..."
+  
 --  p.metadata = p.metadata or json.encode (AltAppStore)     -- TESTING ONLY!
+  test = false
+  if args.test then
+    _log "test <run> phase..."
+    test =  tostring (args.test)
+    return true
+  end
+
+  _log "starting <run> phase..."
   meta = json.decode (args.metadata)
   
   if type (meta) ~= "table" then 
@@ -496,46 +534,60 @@ local jobstate =  {
 
 function update_plugin_job()
   
+  if test then 
+    _log ("test <job> phase, parameter = " .. test)
+    display (nil, test)
+    return jobstate.Done,0 
+  end
+  
+  local title = meta.plugin.Title or '?'
   local status, name, content, N, Nfiles = next_file()
   if N and N == 1 then _log "starting <job> phase..." end
   if status then
     if status ~= 200 then
       _log ("download failed, status:", status)
+      display (nil, title .. " failed")
       --tidy up
       return jobstate.Error,0
     end
     local f, err = io.open (downloads .. name, "wb")
     if not f then 
       _log ("failed writing", name, "with error", err)
+      display (nil, title .. " failed")
       return jobstate.Error,0
     end
     f: write (content)
     f: close ()
     local size = #content or 0
     total = total + size
+    local percent = "%s %0.0f%%"
     local column = "(%d of %d) %6d %s"
     _log (column:format (N, Nfiles, size, name))
+    display (nil, percent: format (title, 100 * N / Nfiles))
     return jobstate.WaitingToStart,0        -- reschedule immediately
   else
     -- finish up
     _log "...final <job> phase"
     _log ("Total size", total)
+    display (nil, (title) .. " 100%")
  
     -- copy/compress files to final destination... 
     local target = meta.repository.target or ludl_folder
     _log ("updating icons in", icon_folder, "...")
     _log ("updating device files in", target, "...")
     
+    local Nicon= 0
     for file in lfs.dir (downloads) do
       local source = downloads .. file
       local attributes = lfs.attributes (source)
       if file: match "^[^%.]" and attributes.mode == "file" then
         local destination
         if file:match ".+%.png$" then    -- ie. *.png
+          Nicon = Nicon + 1
           destination = icon_folder .. file
           file_copy (source, destination)
         else
-        files[#files+1] = {SourceName = file}
+          files[#files+1] = {SourceName = file}
           destination = target .. file
           if Vera then   
             os.execute (table.concat ({"pluto-lzo c", source, destination .. ".lzo"}, ' '))
@@ -546,6 +598,9 @@ function update_plugin_job()
         os.remove (source)
       end
     end
+    
+    _log ("...", Nicon,  "icon files")
+    _log ("...", #files, "device files")
        
     update_InstalledPlugins2 (meta, files)
     _log (meta.plugin.Title or '?', "update completed")
@@ -572,7 +627,14 @@ function AltAppStore_init (d)
   devNo = d  
   _log "starting..." 
   display (ABOUT.NAME,'')  
-  setVar ("Version", ABOUT.VERSION)
+  
+  do -- version number
+    local y,m,d = ABOUT.VERSION:match "(%d+)%D+(%d+)%D+(%d+)"
+    local version = ("v%d.%d.%d"): format (y%2000,m,d)
+    setVar ("Version", version)
+    _log (version)
+  end
+  
   set_failure (0)
   return true, "OK", ABOUT.NAME
 end
