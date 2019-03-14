@@ -2,12 +2,13 @@
 -- this code should be run on a Vera in the Lua Test Code window
 -- 2016.11.16 @akbooer
 -- 2018.02.24 upgrade SSL encryption to tls v1.2 after GitHub deprecation of v1 protocol
+-- 2018.08.14 switch to /port_3480
 
 
 local x = os.execute
 local p = print
 
-p "AltAppStore_install   2018.02.24   @akbooer"
+p "AltAppStore_install   2018.08.14   @akbooer"
 
 local https = require "ssl.https"
 local ltn12 = require "ltn12"
@@ -30,7 +31,7 @@ x "mv /etc/cmh-ludl/AltAppStore-master/*_* /etc/cmh-ludl/"
 p "creating AltAppStore plugin device"
 
 local s,c = luup.inet.wget (table.concat {
-    "http://127.0.0.1:3480/data_request?id=action",
+    "http://127.0.0.1/port_3480/data_request?id=action",
     "&output_format=json",
     "&DeviceNum=0",
     "&serviceId=urn:micasaverde-com:serviceId:HomeAutomationGateway1",
