@@ -56,7 +56,7 @@ release	| MCV version number, See the attached screen to determine the version n
 
 `AltUI` itself doesn't have access to the MiOS store.  Whilst it can get information on plugins which are already installed on Vera, it has no way of knowing the plugin id of any other one.  That's all it needs to tell Vera to fetch it.  This is the function of the `Vera` download button in the store.
 
-`openLuuup`, on the other hand, has no way at all of accessing the MiOS store (it can access to the MiOS Trac repository for some some plugins, indeed, AltUI itself was originally fetched from there) so there needs to be another way...
+`openLuuup`, on the other hand, has no way at all of accessing the MiOS store (it can access to the MiOS Trac repository for some plugins, indeed, AltUI itself was originally fetched from there) so there needs to be another way...
 
 `AltAppStore` can download files from a GitHub repository to either Vera or openLuup using the Alt button.  Aside from the pre-installed plugins in openLuup, this is the only automatic way to download new plugins to openLuup.
 
