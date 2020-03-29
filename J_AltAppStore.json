@@ -376,41 +376,6 @@
   },
   "id":"8686"
 },{
-  "AllowMultiple":"0",
-  "AutoUpdate":"0",
-  "Description":"Alternative App Store for Vera and openLuup",
-  "Devices":[{
-    "DeviceFileName":"D_AltAppStore.xml",
-    "DeviceType":"urn:schemas-upnp-org:device:AltAppStore:1",
-    "ImplFile":"I_AltAppStore.xml",
-    "Invisible":"0"
-  }],
-  "Files":" ",
-  "Icon":"https://raw.githubusercontent.com/akbooer/AltAppStore/master/AltAppStore.png",
-  "Instructions":"https://github.com/akbooer/AltAppStore",
-  "Repositories":[{
-    "folders":[""],
-    "pattern":"AltAppStore",
-    "source":"akbooer/AltAppStore",
-    "type":"GitHub",
-    "versions":{
-      "1":{"release":"master"},
-      "2":{"release":"development"}
-    }
-  }],
-  "Title":"Alternate App Store",
-  "Versions":{
-    "1":{
-      "major":"GitHub",
-      "minor":"master"
-    },
-    "2":{
-      "major":"GitHub",
-      "minor":"development"
-    }
-  },
-  "id":"AltAppStore"
-},{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
   "Description":"Control RGBW devices. This plugin is able to manage RGBW color channels and animation programs.",
