@@ -2596,7 +2596,7 @@
   "AutoUpdate":"1",
   "Description":"Control you Tesla Car from your Vera or openLuup",
   "Devices":[{
-    "DeviceFileName":"D_teslaCar1.xml",
+    "DeviceFileName":"D_TeslaCar1.xml",
     "DeviceType":"urn:schemas-rboer-com:device:TeslaCar:1",
     "ImplFile":"I_TeslaCar1.xml",
     "Invisible":"0"
@@ -2612,7 +2612,8 @@
       "4":{"release":"39676"},
       "5":{"release":"39704"},
       "6":{"release":"39776"},
-      "7":{"release":"39824"}
+      "7":{"release":"39824"},
+      "8":{"release":"39830"}
     }
   },{
     "folders":["src"],
@@ -2625,7 +2626,8 @@
       "4":{"release":"V1.6"},
       "5":{"release":"V1.7"},
       "6":{"release":"V1.9"},
-      "7":{"release":"V1.10"}
+      "7":{"release":"V1.10"},
+      "8":{"release":"V1.11"}
     }
   }],
   "Title":"Tesla Car",
@@ -2657,6 +2659,10 @@
     "7":{
       "major":"1",
       "minor":"10"
+    },
+    "8":{
+      "major":"1",
+      "minor":"11"
     }
   },
   "id":"9290"
@@ -2738,4 +2744,39 @@
       "minor":"0"
     }},
   "id":"AlexaTTS"
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"openLuup Bridge for ZWave.me hardware (Razberry Pi / UZB sticks)",
+  "Devices":[{
+    "DeviceFileName":"D_ZWay.xml",
+    "DeviceType":"ZWay",
+    "ImplFile":"I_ZWay2.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://raw.githubusercontent.com/akbooer/Z-Way/master/icons/Z-Wave.me.png",
+  "Instructions":"https://github.com/akbooer/Z-Way/tree/master/Documentation",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"[DIJLS]_ZWay2.%w+",
+    "source":"akbooer/Z-Way",
+    "type":"GitHub",
+    "versions":{
+      "1":{"release":"master"},
+      "2":{"release":"development"}
+    }
+  }],
+  "Title":"Z-Way",
+  "Versions":{
+    "1":{
+      "major":"GitHub",
+      "minor":"master"
+    },
+    "2":{
+      "major":"GitHub",
+      "minor":"development"
+    }
+  },
+  "id":"4456"
 }]
