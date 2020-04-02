@@ -1141,27 +1141,6 @@
   "id":"8942"
 },{
   "AllowMultiple":"0",
-  "AutoUpdate":" ",
-  "Description":" ",
-  "Devices":{
-    "1":{
-      "major":"0",
-      "minor":"1"
-    },
-    "2":{
-      "major":"0",
-      "minor":"2"
-    }
-  },
-  "Files":"[{\"DeviceFileName\":\"HaperoBoiler\",\"DeviceType\":\"D_HaperoBoiler.xml\",\"ImplFile\":\"I_HaperoBoiler.xml\",\"Invisible\":\"0\"}]",
-  "Icon":" ",
-  "Instructions":"0",
-  "Repositories":"Syntax error in JSON",
-  "Title":"Hapero Boiler",
-  "Versions":[],
-  "id":"4660c763-f7d6-4e95-94e6-01f05ba7ce8d"
-},{
-  "AllowMultiple":"0",
   "AutoUpdate":"1",
   "Description":"Control your ZigBee devices from your Vera",
   "Devices":[{
@@ -2778,5 +2757,5 @@
       "minor":"development"
     }
   },
-  "id":"4456"
+  "id":"Z-Way"
 }]
