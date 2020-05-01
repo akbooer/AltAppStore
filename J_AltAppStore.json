@@ -527,6 +527,7 @@
       "15":{"release":"V3.18"},
       "16":{"release":"V4.0"},
       "17":{"release":"V4.2"},
+      "18":{"release":"V4.3"},
       "2":{"release":"master"},
       "4":{"release":"master"},
       "5":{"release":"master"},
@@ -547,6 +548,7 @@
       "15":{"release":"39611"},
       "16":{"release":"39908"},
       "17":{"release":"39944"},
+      "18":{"release":"39980"},
       "2":{"release":"34580"},
       "3":{"release":"34580"},
       "4":{"release":"36038"},
@@ -594,6 +596,10 @@
     "17":{
       "major":"4",
       "minor":"2"
+    },
+    "18":{
+      "major":"4",
+      "minor":"3"
     },
     "2":{
       "major":"2",
@@ -2711,7 +2717,7 @@
     "type":"GitHub",
     "versions":{"1":{"release":"master"}}
   }],
-  "Title":"Vera OpenSprinkler Plug-in",
+  "Title":"OpenSprinkler",
   "Versions":{"1":{
       "major":"1",
       "minor":"0"
@@ -2763,7 +2769,7 @@
     "type":"GitHub",
     "versions":{"1":{"release":"master"}}
   }],
-  "Title":"Alexa Plug-in",
+  "Title":"VeraAlexa",
   "Versions":{"1":{
       "major":"1",
       "minor":"0"
