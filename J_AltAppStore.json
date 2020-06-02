@@ -2902,7 +2902,7 @@
   "Repositories":[{
     "folders":[""],
     "pattern":"",
-    "source":" vwout/vera-tradfri ",
+    "source":"vwout/vera-tradfri",
     "type":"GitHub",
     "versions":{"1":{"release":"v0.3.0"}}
   }],
