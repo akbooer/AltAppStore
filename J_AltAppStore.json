@@ -33,7 +33,7 @@
     }
   },
   "id":"4456",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -72,7 +72,7 @@
     }
   },
   "id":"4686",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -108,7 +108,7 @@
     }
   },
   "id":"4726",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -138,7 +138,7 @@
       "minor":"52"
     }},
   "id":"7426",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":" ",
@@ -157,7 +157,7 @@
     "versions":{"1":{"release":"31646"}}
   }],
   "id":"7466",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -187,7 +187,7 @@
       "minor":6
     }},
   "id":"8171",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -223,7 +223,7 @@
     }
   },
   "id":"8211",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -282,7 +282,7 @@
     }
   },
   "id":"8246",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -317,7 +317,7 @@
     }
   },
   "id":"8522",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -341,7 +341,7 @@
       "minor":4
     }},
   "id":"8651",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -385,7 +385,7 @@
     }
   },
   "id":"8686",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -420,7 +420,7 @@
     }
   },
   "id":"6686",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -456,7 +456,7 @@
     }
   },
   "id":"razberry-altui",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -512,7 +512,7 @@
     }
   },
   "id":"OW",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -655,7 +655,7 @@
     }
   },
   "id":"8066",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -706,7 +706,7 @@
     }
   },
   "id":"DZB",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -736,7 +736,7 @@
       "minor":"7"
     }},
   "id":"4546d4e8-3b31-468e-b4e5-c020e5d35cca",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -790,7 +790,7 @@
     }
   },
   "id":"4666",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -817,7 +817,7 @@
       "minor":"55"
     }},
   "id":"1501",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -844,7 +844,7 @@
       "minor":"54"
     }},
   "id":"1502",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -871,7 +871,7 @@
       "minor":"53"
     }},
   "id":"1503",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -898,7 +898,7 @@
       "minor":"54"
     }},
   "id":"1504",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -925,7 +925,7 @@
       "minor":"56"
     }},
   "id":"1505",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -961,7 +961,7 @@
     }
   },
   "id":"7016",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -988,7 +988,7 @@
       "minor":"68"
     }},
   "id":"1506",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1015,7 +1015,7 @@
       "minor":"54"
     }},
   "id":"1507",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1045,7 +1045,7 @@
       "minor":"0"
     }},
   "id":"d92166af-ee19-4627-8036-2a3e57a80c3f",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1072,7 +1072,7 @@
       "minor":8
     }},
   "id":"ZiBlue",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1102,7 +1102,7 @@
       "minor":"84"
     }},
   "id":"6b7f2c15-98f3-4c46-87fe-3cff5173ffc8",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1198,7 +1198,7 @@
     }
   },
   "id":"8942",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1224,7 +1224,7 @@
       "minor":"0"
     }},
   "id":"ZiGate",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1270,7 +1270,7 @@
     }
   },
   "id":"9021",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1369,7 +1369,7 @@
     }
   },
   "id":"9031",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1417,7 +1417,7 @@
     }
   },
   "id":"9056",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1447,7 +1447,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1549,7 +1549,7 @@
     }
   },
   "id":"9076",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1609,7 +1609,7 @@
     }
   },
   "id":"8342",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1696,7 +1696,7 @@
     }
   },
   "id":"9036",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1750,7 +1750,7 @@
     }
   },
   "id":"8702",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1792,7 +1792,7 @@
     }
   },
   "id":"8866",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1836,7 +1836,7 @@
     }
   },
   "id":"3586",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1863,7 +1863,7 @@
       "minor":"0"
     }},
   "id":"1235",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1890,7 +1890,7 @@
       "minor":"0"
     }},
   "id":"1588",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1917,7 +1917,7 @@
       "minor":"4"
     }},
   "id":"0a7f75bd-7455-42cb-9393-8b5d3c54eae6",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2106,7 +2106,7 @@
     }
   },
   "id":"9086",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2133,7 +2133,7 @@
       "minor":"stable"
     }},
   "id":"8956",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2180,7 +2180,7 @@
     }
   },
   "id":"8954",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2243,7 +2243,7 @@
     }
   },
   "id":"9111",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2301,7 +2301,7 @@
     }
   },
   "id":"9181",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2328,7 +2328,7 @@
       "minor":"0"
     }},
   "id":"5665def1-9e1b-415b-97c8-7b75565f64c0",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2400,7 +2400,7 @@
     }
   },
   "id":"9194",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2436,7 +2436,7 @@
     }
   },
   "id":"02bda1d5-2762-406e-bce7-76bf9c043a39",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2540,7 +2540,7 @@
     }
   },
   "id":"9231",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2681,7 +2681,7 @@
     }
   },
   "id":"9251",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"-4",
   "AutoUpdate":"1",
@@ -2723,7 +2723,7 @@
     }
   },
   "id":"8774",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2823,7 +2823,7 @@
     }
   },
   "id":"9290",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2850,7 +2850,7 @@
       "minor":"master"
     }},
   "id":"9301",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2877,7 +2877,7 @@
       "minor":"master"
     }},
   "id":"9281",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2904,7 +2904,7 @@
       "minor":"master"
     }},
   "id":"AlexaTTS",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2940,7 +2940,7 @@
     }
   },
   "id":"Z-Way",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2967,7 +2967,7 @@
       "minor":"3"
     }},
   "id":"b3c355fb-1061-44a0-9f4b-4075679ee91e",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2994,7 +2994,7 @@
       "minor":"1"
     }},
   "id":"9314",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"5",
@@ -3024,7 +3024,7 @@
       "minor":"56"
     }},
   "id":"1508",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -3051,7 +3051,7 @@
       "minor":"51"
     }},
   "id":"1509",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3078,7 +3078,7 @@
       "minor":"0.53"
     }},
   "id":"1510",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3105,7 +3105,7 @@
       "minor":"51"
     }},
   "id":"1511",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3132,7 +3132,7 @@
       "minor":"0.51"
     }},
   "id":"1512",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3159,7 +3159,7 @@
       "minor":"0.51"
     }},
   "id":"1513",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3178,15 +3178,24 @@
     "pattern":"",
     "source":"rafale77/Amcrest-Dahua-Openluup",
     "type":"GitHub",
-    "versions":{"1":{"release":"0.2"}}
+    "versions":{
+      "1":{"release":"0.2"},
+      "2":{"release":"0.3"}
+    }
   }],
   "Title":"Amcrest Dahua",
-  "Versions":{"1":{
+  "Versions":{
+    "1":{
       "major":"0",
       "minor":"2"
-    }},
+    },
+    "2":{
+      "major":"0",
+      "minor":"3"
+    }
+  },
   "id":"6939d926-adbd-4dc6-ba50-92a7f2a401a7",
-  "loadtime":1605545326
+  "loadtime":1606051739
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3219,5 +3228,5 @@
     }
   },
   "id":"VeraTelegram",
-  "loadtime":1605545326
+  "loadtime":1606051739
 }]
