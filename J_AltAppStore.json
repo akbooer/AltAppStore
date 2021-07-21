@@ -33,7 +33,7 @@
     }
   },
   "id":"4456",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -72,7 +72,7 @@
     }
   },
   "id":"4686",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -108,7 +108,7 @@
     }
   },
   "id":"4726",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -138,7 +138,7 @@
       "minor":"52"
     }},
   "id":"7426",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -162,7 +162,7 @@
       "minor":36
     }},
   "id":"7466",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -192,7 +192,7 @@
       "minor":6
     }},
   "id":"8171",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -228,7 +228,7 @@
     }
   },
   "id":"8211",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -287,7 +287,7 @@
     }
   },
   "id":"8246",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -322,7 +322,7 @@
     }
   },
   "id":"8522",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -346,7 +346,7 @@
       "minor":4
     }},
   "id":"8651",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -390,7 +390,7 @@
     }
   },
   "id":"8686",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -425,7 +425,7 @@
     }
   },
   "id":"6686",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -461,7 +461,7 @@
     }
   },
   "id":"razberry-altui",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -517,7 +517,7 @@
     }
   },
   "id":"OW",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -660,7 +660,7 @@
     }
   },
   "id":"8066",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -711,7 +711,7 @@
     }
   },
   "id":"DZB",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -741,7 +741,7 @@
       "minor":"7"
     }},
   "id":"4546d4e8-3b31-468e-b4e5-c020e5d35cca",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -795,7 +795,7 @@
     }
   },
   "id":"4666",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -822,7 +822,7 @@
       "minor":"55"
     }},
   "id":"1501",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -849,7 +849,7 @@
       "minor":"54"
     }},
   "id":"1502",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -876,7 +876,7 @@
       "minor":"53"
     }},
   "id":"1503",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -903,7 +903,7 @@
       "minor":"54"
     }},
   "id":"1504",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -930,7 +930,7 @@
       "minor":"56"
     }},
   "id":"1505",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -966,7 +966,7 @@
     }
   },
   "id":"7016",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -993,7 +993,7 @@
       "minor":"68"
     }},
   "id":"1506",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1020,7 +1020,7 @@
       "minor":"54"
     }},
   "id":"1507",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1050,7 +1050,7 @@
       "minor":"0"
     }},
   "id":"d92166af-ee19-4627-8036-2a3e57a80c3f",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1077,7 +1077,7 @@
       "minor":8
     }},
   "id":"ZiBlue",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1107,7 +1107,7 @@
       "minor":"84"
     }},
   "id":"6b7f2c15-98f3-4c46-87fe-3cff5173ffc8",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1203,7 +1203,7 @@
     }
   },
   "id":"8942",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1229,7 +1229,7 @@
       "minor":"0"
     }},
   "id":"ZiGate",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1275,7 +1275,7 @@
     }
   },
   "id":"9021",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1374,7 +1374,7 @@
     }
   },
   "id":"9031",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1422,7 +1422,7 @@
     }
   },
   "id":"9056",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1452,7 +1452,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -1560,7 +1560,7 @@
     }
   },
   "id":"9076",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1620,7 +1620,7 @@
     }
   },
   "id":"8342",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1707,7 +1707,7 @@
     }
   },
   "id":"9036",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1761,7 +1761,7 @@
     }
   },
   "id":"8702",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1803,7 +1803,7 @@
     }
   },
   "id":"8866",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1847,7 +1847,7 @@
     }
   },
   "id":"3586",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1874,7 +1874,7 @@
       "minor":"0"
     }},
   "id":"1235",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -1901,7 +1901,7 @@
       "minor":"0"
     }},
   "id":"1588",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1928,7 +1928,7 @@
       "minor":"4"
     }},
   "id":"0a7f75bd-7455-42cb-9393-8b5d3c54eae6",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2117,7 +2117,7 @@
     }
   },
   "id":"9086",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2144,7 +2144,7 @@
       "minor":"stable"
     }},
   "id":"8956",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2191,7 +2191,7 @@
     }
   },
   "id":"8954",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2254,7 +2254,7 @@
     }
   },
   "id":"9111",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2312,7 +2312,7 @@
     }
   },
   "id":"9181",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2339,7 +2339,7 @@
       "minor":"56"
     }},
   "id":"5665def1-9e1b-415b-97c8-7b75565f64c0",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2411,7 +2411,7 @@
     }
   },
   "id":"9194",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2447,7 +2447,7 @@
     }
   },
   "id":"02bda1d5-2762-406e-bce7-76bf9c043a39",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -2551,7 +2551,7 @@
     }
   },
   "id":"9231",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2692,7 +2692,7 @@
     }
   },
   "id":"9251",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"-4",
   "AutoUpdate":"1",
@@ -2734,7 +2734,7 @@
     }
   },
   "id":"8774",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -2760,6 +2760,7 @@
       "15":{"release":"40694"},
       "16":{"release":"40700"},
       "17":{"release":"40716"},
+      "18":{"release":"40732"},
       "3":{"release":"39668"},
       "4":{"release":"39676"},
       "5":{"release":"39704"},
@@ -2782,6 +2783,7 @@
       "15":{"release":"V2.2"},
       "16":{"release":"V2.3"},
       "17":{"release":"V2.4"},
+      "18":{"release":"V2.5"},
       "2":{"release":"V1.4"},
       "3":{"release":"V1.5"},
       "4":{"release":"V1.6"},
@@ -2830,6 +2832,10 @@
       "major":"2",
       "minor":"4"
     },
+    "18":{
+      "major":"2",
+      "minor":"5"
+    },
     "2":{
       "major":"1",
       "minor":"4"
@@ -2864,7 +2870,7 @@
     }
   },
   "id":"9290",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2891,7 +2897,7 @@
       "minor":"master"
     }},
   "id":"9301",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2918,7 +2924,7 @@
       "minor":"master"
     }},
   "id":"9281",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -2945,7 +2951,7 @@
       "minor":"master"
     }},
   "id":"AlexaTTS",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -2981,7 +2987,7 @@
     }
   },
   "id":"Z-Way",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -3022,7 +3028,7 @@
     }
   },
   "id":"b3c355fb-1061-44a0-9f4b-4075679ee91e",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -3078,7 +3084,7 @@
     }
   },
   "id":"9314",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"5",
@@ -3108,7 +3114,7 @@
       "minor":"56"
     }},
   "id":"1508",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"1",
@@ -3135,7 +3141,7 @@
       "minor":"51"
     }},
   "id":"1509",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3162,7 +3168,7 @@
       "minor":"0.53"
     }},
   "id":"1510",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3189,7 +3195,7 @@
       "minor":"51"
     }},
   "id":"1511",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3216,7 +3222,7 @@
       "minor":"0.51"
     }},
   "id":"1512",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3243,7 +3249,7 @@
       "minor":"0.51"
     }},
   "id":"1513",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3279,7 +3285,7 @@
     }
   },
   "id":"6939d926-adbd-4dc6-ba50-92a7f2a401a7",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3312,7 +3318,7 @@
     }
   },
   "id":"VeraTelegram",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3339,7 +3345,7 @@
       "minor":"52"
     }},
   "id":"1514",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3375,7 +3381,7 @@
     }
   },
   "id":"DZB2",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -3402,7 +3408,7 @@
       "minor":"0"
     }},
   "id":"4226",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
@@ -3455,7 +3461,7 @@
     }
   },
   "id":"9326",
-  "loadtime":1623849357
+  "loadtime":1626890513
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"0",
@@ -3482,5 +3488,167 @@
       "minor":"1"
     }},
   "id":"Homebridge2openluup",
-  "loadtime":1623849357
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/README.md",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1",
+      "minor":"0.1.0"
+    }},
+  "id":"8d4e147d-39f0-4d6e-9be5-c6a34fd7fc71",
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"1"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"Follow instructions on https://github.com/GreatGazoe/DreamColorESP to install and setup ESP8266 (NodeMCU). Follow instructions on https://github.com/GreatGazoe/DreamColorESPVeraPlugIn to install and setup Vera. That",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1",
+      "minor":"0.1.0"
+    }},
+  "id":"6e028cad-a191-4316-9978-350846751b66",
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"Follow instructions on https://github.com/GreatGazoe/DreamColorESP to install and setup ESP8266 (NodeMCU). Follow instructions on https://github.com/GreatGazoe/DreamColorESPVeraPlugIn to install and setup Vera. That's it!!",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1.0",
+      "minor":"1.0"
+    }},
+  "id":"66182d4d-f569-45c1-8acb-c8bc69539e2a",
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"Follow instructions on https://github.com/GreatGazoe/DreamColorESP to install and setup ESP8266 (NodeMCU). Follow instructions on https://github.com/GreatGazoe/DreamColorESPVeraPlugIn to install and setup Vera. That's it!!",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1.0",
+      "minor":"1.0"
+    }},
+  "id":"8a12c0a4-931f-49d7-b942-1b537afa3264",
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"Follow instructions on https://github.com/GreatGazoe/DreamColorESP to install and setup ESP8266 (NodeMCU). Follow instructions on https://github.com/GreatGazoe/DreamColorESPVeraPlugIn to install and setup Vera. That's it!!",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1.0",
+      "minor":"1.0"
+    }},
+  "id":"1b0d19d9-95b3-4cfe-9635-e227d3925086",
+  "loadtime":1626890513
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"Control WS2812B LED-Strip with ESP8266 (NodeMCU)",
+  "Devices":[{
+    "DeviceFileName":"D_DreamColorESP1.xml",
+    "DeviceType":"urn:schemas-upnp-org:device:DimmableRGBLight:1",
+    "ImplFile":"I_DreamColorESP1.xml",
+    "Invisible":"0"
+  }],
+  "Files":" ",
+  "Icon":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn/blob/main/ESP8266NeoPixel.png?raw=true",
+  "Instructions":"Follow instructions on https://github.com/GreatGazoe/DreamColorESP to install and setup ESP8266 (NodeMCU). Follow instructions on https://github.com/GreatGazoe/DreamColorESPVeraPlugIn to install and setup Vera. That",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"",
+    "source":"https://github.com/GreatGazoe/DreamColorESPVeraPlugIn",
+    "type":"GitHub",
+    "versions":{"1":{"release":"DreamColorESPVeraPlugIn"}}
+  }],
+  "Title":"DreamColorESP8266",
+  "Versions":{"1":{
+      "major":"1",
+      "minor":"0.1.0"
+    }},
+  "id":"0309d926-e823-42bb-a67e-77f256505d4f",
+  "loadtime":1626890513
 }]
