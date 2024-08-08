@@ -27,7 +27,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1722511775
+  "loadtime":1723128618
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1779,7 +1779,8 @@
       "1":{"release":"V0.1"},
       "2":{"release":"V0.2"},
       "3":{"release":"V1.0"},
-      "4":{"release":"V1.1"}
+      "4":{"release":"V1.1"},
+      "5":{"release":"V1.4"}
     }
   },{
     "type":"Vera",
@@ -1806,6 +1807,10 @@
     "4":{
       "major":"1",
       "minor":"1"
+    },
+    "5":{
+      "major":"1",
+      "minor":"4"
     }
   },
   "id":"9326"
