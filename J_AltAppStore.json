@@ -27,7 +27,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1724759077
+  "loadtime":1725291740
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1757,41 +1757,6 @@
     }
   },
   "id":"MetOffice_DataHub"
-},{
-  "AllowMultiple":"0",
-  "AutoUpdate":"0",
-  "Description":"Weather app for openLuup using UK MetOffice DataPoint",
-  "Devices":[{
-    "DeviceFileName":"D_MetOffice_DataPoint.xml",
-    "DeviceType":"urn:akbooer-com:device:MetOffice_DataPoint:1",
-    "ImplFile":"I_MetOffice_DataPoint.xml",
-    "Invisible":"0"
-  }],
-  "Files":"",
-  "Icon":"https://raw.githubusercontent.com/akbooer/MetOffice_DataPoint/master/icons/MetO.png",
-  "Instructions":"https://github.com/akbooer/MetOffice_DataPoint/tree/master/README.md",
-  "Repositories":[{
-    "folders":[""],
-    "pattern":"[DIJLSU].-_DataPoint%w*%.%w+",
-    "source":"akbooer/MetOffice_DataPoint",
-    "type":"GitHub",
-    "versions":{
-      "1":{"release":"main"},
-      "2":{"release":"development"}
-    }
-  }],
-  "Title":"MetOffice DataPoint",
-  "Versions":{
-    "1":{
-      "major":"GitHub",
-      "minor":"main"
-    },
-    "2":{
-      "major":"GitHub",
-      "minor":"development"
-    }
-  },
-  "id":"MetOffice_DataPoint"
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
