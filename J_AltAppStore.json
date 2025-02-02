@@ -27,7 +27,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1738516765
+  "loadtime":1738517540
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1887,11 +1887,11 @@
   }],
   "Files":"",
   "Icon":"https://cdn.brandfetch.io/idyvn_eM2v/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B",
-  "Instructions":"https://github.com/akbooer/OctpusEnergy/tree/main/README.md",
+  "Instructions":"https://github.com/akbooer/Octopus/blob/main/README.md",
   "Repositories":[{
     "folders":[""],
     "pattern":"[DIJLSU].-OctopusEnergy%w*%.%w+",
-    "source":"akbooer/OctopusEnergy",
+    "source":"akbooer/Octopus",
     "type":"GitHub",
     "versions":{
       "1":{"release":"main"},
