@@ -27,7 +27,7 @@
       "minor":"42"
     }},
   "id":"9066",
-  "loadtime":1737202178
+  "loadtime":1738516765
 },{
   "AllowMultiple":"0",
   "AutoUpdate":"1",
@@ -1875,6 +1875,41 @@
       "minor":"4"
     }},
   "id":"0a7f75bd-7455-42cb-9393-8b5d3c54eae6"
+},{
+  "AllowMultiple":"0",
+  "AutoUpdate":"0",
+  "Description":"A plugin to read Octopus Energy smart meter data",
+  "Devices":[{
+    "DeviceFileName":"D_OctopusEnergy.xml",
+    "DeviceType":"urn:akbooer-com:device:OctopusEnergy:1",
+    "ImplFile":"I_OctopusEnergy.xml",
+    "Invisible":"0"
+  }],
+  "Files":"",
+  "Icon":"https://cdn.brandfetch.io/idyvn_eM2v/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B",
+  "Instructions":"https://github.com/akbooer/OctpusEnergy/tree/main/README.md",
+  "Repositories":[{
+    "folders":[""],
+    "pattern":"[DIJLSU].-OctopusEnergy%w*%.%w+",
+    "source":"akbooer/OctopusEnergy",
+    "type":"GitHub",
+    "versions":{
+      "1":{"release":"main"},
+      "2":{"release":"development"}
+    }
+  }],
+  "Title":"OctopusEnergy",
+  "Versions":{
+    "1":{
+      "major":"GitHub",
+      "minor":"main"
+    },
+    "2":{
+      "major":"GitHub",
+      "minor":"development"
+    }
+  },
+  "id":"OctopusEnergy"
 },{
   "AllowMultiple":"1",
   "AutoUpdate":"0",
